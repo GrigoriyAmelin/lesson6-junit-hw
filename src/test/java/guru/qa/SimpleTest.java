@@ -9,6 +9,10 @@ class SimpleTest {
     @Test
     void simpleTest() {
         assertTrue(true);
+        }
 
+    @Test
+    void simpleTest() {
+        assertTrue(2>1);
     }
-}
+    }
