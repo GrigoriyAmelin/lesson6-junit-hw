@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.codeborne.selenide.Condition.*;
@@ -37,5 +38,18 @@ public class ParametrizedSearchTest {
         Selenide.$("#text").setValue(String.valueOf(testData));
         Selenide.$("button[type='submit']").click();
         Selenide.$$("li.serp-item").find(text(String.valueOf(testData))).shouldBe(visible);
+    }
+
+    @CsvSource(value = {
+            "Selenide| concise UI tests in Java",
+            "JUnit 5| IntelliJ IDEA"
+    },
+    delimiter = '|'
+    )
+    @ParameterizedTest(name = "Проверка отображаемых результатов в яндексе для запроса \"{0}\"")
+    void complexSearchTest(String testData, String expectedText) {
+        Selenide.$("#text").setValue(testData);
+        Selenide.$("button[type='submit']").click();
+        Selenide.$$("li.serp-item").find(text(expectedText)).shouldBe(visible);
     }
 }
