@@ -30,4 +30,12 @@ public class ParametrizedSearchTest {
         Selenide.$("button[type='submit']").click();
         Selenide.$$("li.serp-item").find(text(testData)).shouldBe(visible);
     }
+
+    @ValueSource(ints = {1, 5})
+    @ParameterizedTest(name = "Проверка отображаемых результатов в яндексе для запроса \"{0}\"")
+    void commonSearchTestInts(int testData) {
+        Selenide.$("#text").setValue(String.valueOf(testData));
+        Selenide.$("button[type='submit']").click();
+        Selenide.$$("li.serp-item").find(text(String.valueOf(testData))).shouldBe(visible);
+    }
 }
