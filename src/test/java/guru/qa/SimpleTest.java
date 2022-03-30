@@ -1,5 +1,6 @@
 package guru.qa;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +29,8 @@ class SimpleTest {
     }
 
     @Test
-    @DisplayName("SimpleBrokenTest")
+    @Disabled
+//    @DisplayName("SimpleBrokenTest")
     void simpleBrokenTest() {
         throw new IllegalStateException("Broken");
     }
