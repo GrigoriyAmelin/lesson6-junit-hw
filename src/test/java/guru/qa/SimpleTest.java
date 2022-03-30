@@ -29,7 +29,7 @@ class SimpleTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("Временно падает")
 //    @DisplayName("SimpleBrokenTest")
     void simpleBrokenTest() {
         throw new IllegalStateException("Broken");
