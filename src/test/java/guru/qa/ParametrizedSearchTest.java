@@ -7,8 +7,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -44,12 +49,25 @@ public class ParametrizedSearchTest {
             "Selenide| concise UI tests in Java",
             "JUnit 5| IntelliJ IDEA"
     },
-    delimiter = '|'
+            delimiter = '|'
     )
     @ParameterizedTest(name = "Проверка отображаемых результатов в яндексе для запроса \"{0}\"")
     void complexSearchTest(String testData, String expectedText) {
         Selenide.$("#text").setValue(testData);
         Selenide.$("button[type='submit']").click();
         Selenide.$$("li.serp-item").find(text(expectedText)).shouldBe(visible);
+    }
+
+    static Stream<Arguments> mixedArgumentsTestingDataProvider() {
+        return Stream.of(
+                Arguments.of("Selenide", List.of(1, 2, 3), true),
+                Arguments.of(("JUnit 5"), List.of(5, 6, 7), false)
+        );
+    }
+
+    @MethodSource(value = "mixedArgumentsTestingDataProvider")
+    @ParameterizedTest(name = "Name {1}")
+    void mixedArgumentsTest(String firstArg, List<Integer> secondArg, boolean aBooleanValue) {
+        System.out.println("String: " + firstArg + "list: " + secondArg.toString() + " boolean: " + aBooleanValue);
     }
 }
