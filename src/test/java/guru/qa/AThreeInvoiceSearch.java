@@ -10,23 +10,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ATreeInvoiceSearch {
+public class AThreeInvoiceSearch {
 
     @BeforeEach
     void precondition() {
 
-        Selenide.open("https://a-3.ru/");
-        $("[data-testid='MainPageData-Gos-ShowAll']").scrollTo().click();
-        sleep(1000);
-        $("[data-testid='MainPageData-GosMigration-Link']").click();
-        sleep(1000);
-        $("[data-testid='Payment-H1']").shouldHave(text("Госпошлины миграционной службы"));
-        $(".flocktory-widget-overlay");
-        switchTo().frame("fl-297663");
-        $("button[type='button']").click();
-        switchTo().defaultContent();
+        Selenide.open("https://www.a-3.ru/payment/6887");
         $("#number").scrollTo().click();
-        sleep(1000);
+        sleep(2000);
         $("[data-testid='UserDataForm-SubmitButton']").click();
         $(byText("Государственная пошлина за выдачу паспорта гражданина РФ")).scrollTo().click();
         sleep(1000);
