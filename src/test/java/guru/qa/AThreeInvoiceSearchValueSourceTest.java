@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AThreeInvoiceSearch {
+public class AThreeInvoiceSearchValueSourceTest {
 
     @BeforeEach
     void precondition() {
